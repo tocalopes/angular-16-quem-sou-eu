@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Jogador } from 'src/app/shared/models/jogador.model';
 
 
@@ -10,11 +10,24 @@ import { Jogador } from 'src/app/shared/models/jogador.model';
 })
 export class JogadorService {
 
-  private api = 'http://localhost:3000/pessoas';
+  private api = 'http://localhost:3000/jogadores';
 
   constructor(private http: HttpClient){}
 
   getJogadores(): Observable<Jogador[]> {
     return this.http.get<Jogador[]>(this.api);
+  }
+
+  adicionar(nome: string): Observable<Jogador> {
+    return this.getJogadores()
+      .pipe(
+        switchMap((jogadores: Jogador[]) => {
+          let jogador: Jogador = {
+            idJogador: jogadores.length+1,
+            nome: nome
+          }
+          return this.http.post<Jogador>(this.api, jogador);
+        })
+      )
   }
 }

@@ -3,35 +3,25 @@
         <h1>Cadastrar jogadores</h1>
     </div>
 
-    <div class="container-form">
-        <form>
-            <div class="input-container">
+    <div class="container-form" *ngIf="!isLoading">
+        <form [formGroup]="formGroup">
+            <div class="input-container" *ngFor="let jogador of jogadores;let i = index ">
                 <mat-form-field>
                     <mat-label>Jogador</mat-label>
-                    <input type="text" matInput [formControl]="jogadorFormControl" placeholder="Ex. pat@example.com">
+                    <input type="text" matInput [formControlName]="'jogador'+i" placeholder="Ex. pat@example.com">
                 </mat-form-field>
-                <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
-                    <mat-icon>add</mat-icon>
-                  </button>
-            </div>
-            <div class="input-container">
-                <mat-form-field>
-                    <mat-label>Jogador</mat-label>
-                    <input type="text" matInput [formControl]="jogadorFormControl" placeholder="Ex. pat@example.com">
-                </mat-form-field>
-                <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
-                    <mat-icon>add</mat-icon>
-                  </button>
-            </div>
-            <div class="input-container">
-                <mat-form-field>
-                    <mat-label>Jogador</mat-label>
-                    <input type="text" matInput [formControl]="jogadorFormControl" placeholder="Ex. pat@example.com">
-                </mat-form-field>
-                <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
+                <button 
+                    *ngIf="i == jogadores.length-1" 
+                    mat-mini-fab color="accent" 
+                    aria-label="Example icon button with a menu icon"
+                    (click)="adicionarJogador(i)">
                     <mat-icon>add</mat-icon>
                   </button>
             </div>
         </form>
+    </div>
+
+    <div class="container-iniciar">
+        <button mat-raised-button (click)="cadastrarPalavras()">Iniciar</button>
     </div>
 </div>

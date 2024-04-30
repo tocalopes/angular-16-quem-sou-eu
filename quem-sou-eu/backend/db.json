@@ -1,18 +1,38 @@
 {
-    "jogadores": [
-      { "idJogador": 1, "nome": "Gabriel", "idade": 30 }
-    ],
-    "palavras": [
-        {
-            "idPalavra": 0,
-            "descricao": "Teste"
-        }
-    ],
-    "palavras-jogador": [
-        {
-            "idPalavra": 0,
-            "idJogador": 0
-        }
-    ]
+  "jogadores": [
+    {
+      "idJogador": 1,
+      "nome": "Gabriel",
+      "id": "116a"
+    },
+    {
+      "id": "1ade",
+      "idJogador": 5,
+      "nome": "mylena"
+    },
+    {
+      "id": "c558",
+      "idJogador": 3,
+      "nome": "sada"
+    },
+    {
+      "id": "92b2",
+      "idJogador": 4,
+      "nome": "meu pinto"
+    }
+  ],
+  "palavras": [
+    {
+      "idPalavra": 0,
+      "descricao": "Teste",
+      "id": "8b0c"
+    }
+  ],
+  "palavras-jogador": [
+    {
+      "idPalavra": 0,
+      "idJogador": 0,
+      "id": "b6ff"
+    }
+  ]
 }
-  

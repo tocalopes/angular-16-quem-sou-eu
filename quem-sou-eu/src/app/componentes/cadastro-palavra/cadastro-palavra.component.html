@@ -1,1 +1,21 @@
-<p>cadastro-palavra works!</p>
+<div class="container">
+    <div class="container-titulo">
+        <h1>Cadastrar palavra para jogador</h1>
+    </div>
+
+    <div class="container-form">
+        <form>
+            <div class="input-container">
+                <mat-form-field>
+                    <mat-label>Digite uma palavra</mat-label>
+                    <input type="password" matInput [formControl]="jogadorFormControl" placeholder="Exemplo: Pênis">
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div class="container-selecao">
+        <button mat-raised-button (click)="voltar()" color="accent">Voltar</button>
+        <button mat-raised-button (click)="proximo()">Próximo</button>
+    </div>
+</div>

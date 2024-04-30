@@ -1,4 +1,4 @@
 export interface Jogador{
-    idJogado: number,
+    idJogador: number,
     nome: string,
 }
