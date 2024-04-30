@@ -1,0 +1,18 @@
+{
+    "jogadores": [
+      { "idJogador": 1, "nome": "Gabriel", "idade": 30 }
+    ],
+    "palavras": [
+        {
+            "idPalavra": 0,
+            "descricao": "Teste"
+        }
+    ],
+    "palavras-jogador": [
+        {
+            "idPalavra": 0,
+            "idJogador": 0
+        }
+    ]
+}
+  
