@@ -14,7 +14,7 @@ const routes: Routes = [
     component: CadastroJogadorComponent
   },
   {
-    path: 'cadastrar-palavras',
+    path: 'cadastrar-palavras/:indice',
     component: CadastroPalavraComponent
   }
 ];

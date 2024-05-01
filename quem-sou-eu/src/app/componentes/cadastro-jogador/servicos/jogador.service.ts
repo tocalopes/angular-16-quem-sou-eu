@@ -18,6 +18,10 @@ export class JogadorService {
     return this.http.get<Jogador[]>(this.api);
   }
 
+  getJogadorById(idJogador: number): Observable<Jogador[]> {
+    return this.http.get<Jogador[]>(`${this.api}?idJogador=${idJogador}`);
+  }
+
   adicionar(nome: string): Observable<Jogador> {
     return this.getJogadores()
       .pipe(

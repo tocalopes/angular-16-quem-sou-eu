@@ -1,6 +1,6 @@
 <div class="container">
     <div class="container-titulo">
-        <h1>Cadastrar palavra para jogador</h1>
+        <h1>{{perguntaResponde.jogadorQuePergunta?.nome | uppercase }} digite uma palavra para  {{perguntaResponde.jogadorQueResponde?.nome | uppercase }}</h1>
     </div>
 
     <div class="container-form">
@@ -8,7 +8,7 @@
             <div class="input-container">
                 <mat-form-field>
                     <mat-label>Digite uma palavra</mat-label>
-                    <input type="password" matInput [formControl]="jogadorFormControl" placeholder="Exemplo: Pênis">
+                    <input type="password" matInput [formControl]="jogadorFormControl" placeholder="Exemplo: Pênis" style="color: transparent; background-color: transparent;">
                 </mat-form-field>
             </div>
         </form>
