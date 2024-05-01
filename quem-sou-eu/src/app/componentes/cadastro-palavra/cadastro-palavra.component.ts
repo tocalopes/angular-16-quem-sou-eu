@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstruturaQuestionamento } from 'src/app/shared/models/estruturaQuestionamento.model';
 import { QuemPerguntaQuemRespondeService } from 'src/app/shared/servicos/quem-pergunta-quem-responde.service';
+import { PalavraService } from './servicos/palavra.service';
+import { Palavra } from 'src/app/shared/models/palavra.model';
 
 @Component({
   selector: 'app-cadastro-palavra',
@@ -13,10 +15,12 @@ export class CadastroPalavraComponent implements OnInit{
   constructor(
     private router: Router,
     private route:ActivatedRoute,
-    private quemPerguntaERespondeService: QuemPerguntaQuemRespondeService) {}
+    private quemPerguntaERespondeService: QuemPerguntaQuemRespondeService,
+    private palavraService: PalavraService) {}
   
   index: number = 0;
   perguntaResponde: EstruturaQuestionamento = {};
+  palavraFormControl = new FormControl('');
 
   ngOnInit(): void {
     this.getIndex();
@@ -31,16 +35,35 @@ export class CadastroPalavraComponent implements OnInit{
       indexString = i.toString();
     }
     this.index = parseInt(indexString,10);
+    if(this.index === 0){
+      this.palavraService.getPalavras().subscribe(
+        p => {
+          p.forEach(palavra => this.delete(palavra.id));
+        }
+      )
+    }
     console.log(this.index);
   }
 
+  private delete(id: any): void {
+    this.palavraService.clear(id).subscribe({
+      next: () => {
+        console.log('Registros limpos com sucesso!');
+        // Faça qualquer outra ação necessária após limpar os registros
+      },
+      error: (error) => {
+        console.error('Ocorreu um erro ao limpar os registros:', error);
+      }
+    });;
+  }
+
   onStart(): void {
+    this.palavraFormControl = new FormControl('');
     this.perguntaResponde = this.quemPerguntaERespondeService.getData()[this.index];
     console.log(this.perguntaResponde);
     console.log(this.quemPerguntaERespondeService.getData());
   }
 
-  jogadorFormControl = new FormControl('');
 
   voltar() {
     if(this.index === 0){
@@ -53,11 +76,19 @@ export class CadastroPalavraComponent implements OnInit{
   }
 
   proximo() {
-    if(this.index === this.quemPerguntaERespondeService.getData().length - 1){
-      this.router.navigate(['']);
-    }else{
-      this.index = this.index + 1;
-      this.onStart();
+    let palavra: Palavra = {
+      idJogadorCadastro : this.perguntaResponde.jogadorQuePergunta?.idJogador,
+      idJogadorResponde : this.perguntaResponde.jogadorQueResponde?.idJogador,
+      palavra: this.palavraFormControl.value
     }
+    this.palavraService.adicionar(palavra).subscribe( r => {
+      if(this.index === this.quemPerguntaERespondeService.getData().length - 1){
+        this.router.navigate(['']);
+      }else{
+        this.index = this.index + 1;
+        this.onStart();
+      }
+    })
+
   }
 }

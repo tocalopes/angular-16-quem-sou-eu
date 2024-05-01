@@ -7,32 +7,31 @@
     },
     {
       "id": "1ade",
-      "idJogador": 5,
+      "idJogador": 2,
       "nome": "mylena"
-    },
-    {
-      "id": "c558",
-      "idJogador": 3,
-      "nome": "sada"
-    },
-    {
-      "id": "92b2",
-      "idJogador": 4,
-      "nome": "meu pinto"
     }
   ],
   "palavras": [
     {
-      "idPalavra": 0,
-      "descricao": "Teste",
-      "id": "8b0c"
+      "id": "7ba7",
+      "idJogadorCadastro": 1,
+      "idJogadorResponde": 2,
+      "palavra": "asdasd",
+      "idPalavra": 1
+    },
+    {
+      "id": "757a",
+      "idJogadorCadastro": 2,
+      "idJogadorResponde": 1,
+      "palavra": "asdasd",
+      "idPalavra": 2
     }
   ],
-  "palavras-jogador": [
+  "puntuacao": [
     {
-      "idPalavra": 0,
+      "id": "0",
       "idJogador": 0,
-      "id": "b6ff"
+      "tentativas": 0
     }
   ]
 }

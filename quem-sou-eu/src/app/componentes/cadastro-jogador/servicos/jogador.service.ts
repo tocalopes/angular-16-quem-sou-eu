@@ -22,6 +22,10 @@ export class JogadorService {
     return this.http.get<Jogador[]>(`${this.api}?idJogador=${idJogador}`);
   }
 
+  clear(id:any): Observable<any> {
+    return this.http.delete<any>(this.api+ "/" +id);
+  }
+
   adicionar(nome: string): Observable<Jogador> {
     return this.getJogadores()
       .pipe(
