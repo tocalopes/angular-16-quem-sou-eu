@@ -11,22 +11,7 @@
       "nome": "mylena"
     }
   ],
-  "palavras": [
-    {
-      "id": "7ba7",
-      "idJogadorCadastro": 1,
-      "idJogadorResponde": 2,
-      "palavra": "asdasd",
-      "idPalavra": 1
-    },
-    {
-      "id": "757a",
-      "idJogadorCadastro": 2,
-      "idJogadorResponde": 1,
-      "palavra": "asdasd",
-      "idPalavra": 2
-    }
-  ],
+  "palavras": [],
   "puntuacao": [
     {
       "id": "0",

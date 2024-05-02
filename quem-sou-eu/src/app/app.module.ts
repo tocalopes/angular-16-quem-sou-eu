@@ -15,12 +15,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { QuemSouEuComponent } from './componentes/quem-sou-eu/quem-sou-eu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastroJogadorComponent,
     CadastroPalavraComponent,
+    QuemSouEuComponent,
   ],
   imports: [
     BrowserModule,

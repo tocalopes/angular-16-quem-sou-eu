@@ -1,0 +1,64 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container-titulo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: 36px;
+    h1 {
+        font-family: "Jersey 15", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 80px;
+    }
+    h2{
+        margin-top: 40px;
+        font-family: "Jersey 15", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 60px;
+    }
+    
+}
+
+.container-palavra{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .contador{
+        margin-top: 80px;
+        font-family: "Jersey 15", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 150px;
+        color: white;
+    }
+    
+}
+
+.container-selecao{
+    display: flex;
+    margin-top: 80px;
+    width: 40%;
+    flex-direction: row;
+    height: 200px;
+    align-items: center;
+    justify-content: space-between;
+    button{
+        width: 90%;
+        height: 50%;
+        font-family: "Jersey 15", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 40px; 
+    }
+}

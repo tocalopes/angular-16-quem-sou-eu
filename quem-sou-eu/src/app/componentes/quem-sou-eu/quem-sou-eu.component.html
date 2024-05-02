@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="container-titulo">
+        <h1>Fulano</h1>
+        <h2>Sua palavra é</h2>
+    </div>
+
+    <div class="container-palavra">
+        <span class="contador">{{ tempo }}</span>
+    </div>
+
+    <div class="container-selecao">
+        <button mat-raised-button  *ngIf="!iniciado" color="accent" (click)="iniciar()">Iniciar</button>
+        <button mat-raised-button  *ngIf="iniciado" (click)="parar()">Parar</button>
+    </div>
+
+    <!-- <div class="container-selecao">
+        <button mat-raised-button  color="accent">Errou</button>
+        <button mat-raised-button>Acertou</button>
+    </div> -->
+</div>
