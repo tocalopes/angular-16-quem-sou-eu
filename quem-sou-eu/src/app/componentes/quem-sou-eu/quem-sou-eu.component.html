@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!isLoading">
+<div class="container" *ngIf="!isLoading && !fimDeJogo">
     <div class="container-titulo">
         <h1>{{quemPerguntaEResponde.jogadorQueResponde?.nome}}</h1>
         <h2>Sua palavra é "{{palavra.palavra}}"</h2>
@@ -8,13 +8,24 @@
         <span class="contador">{{ tempo }}</span>
     </div>
 
-    <div class="container-selecao">
+    <div class="container-selecao" *ngIf="!isFinalizado">
         <button mat-raised-button  *ngIf="!iniciado" color="accent" (click)="iniciar()">Iniciar</button>
         <button mat-raised-button  *ngIf="iniciado" (click)="parar()">Parar</button>
     </div>
 
-    <!-- <div class="container-selecao">
-        <button mat-raised-button  color="accent">Errou</button>
-        <button mat-raised-button>Acertou</button>
-    </div> -->
+    <div class="container-selecao" *ngIf="isFinalizado">
+        <button mat-raised-button (click)="errou()" color="accent">Errou</button>
+        <button mat-raised-button (click)="acertou()">Acertou</button>
+    </div>
+</div>
+<div class="container" *ngIf="fimDeJogo">
+    <div class="container-titulo">
+        <h2>Ranking</h2>
+    </div>
+
+    <div class="container-palavra">
+        <h2 *ngFor="let pontuacao of pontuacaoFinal; let i = index">
+            Jogador {{pontuacao.nomeJogador}} com {{pontuacao.tentativas}} tentativas
+        </h2>
+    </div>
 </div>

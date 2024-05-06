@@ -47,7 +47,7 @@ export class PontuacaoService {
   }
 
   getPontuacaoPorIdJogador(idJogador: number): Observable<Pontuacao[]> {
-    return this.http.get<Pontuacao[]>(`${this.api}?IdJogadorResponde=${idJogador}`);
+    return this.http.get<Pontuacao[]>(`${this.api}?idJogador=${idJogador}`);
   }
 
   iniciarPontuacoes(jogadores: Jogador[]){
@@ -57,7 +57,8 @@ export class PontuacaoService {
         let pontuacao: Pontuacao = {
          idJogador: jogador.idJogador,
          tentativas: 0,
-         acertou: false      
+         acertou: false,
+         nomeJogador: jogador.nome      
         }
         // ob.pipe(
         //   switchMap(() => this.adicionar(pontuacao))
@@ -73,14 +74,14 @@ export class PontuacaoService {
         return this.http.post<Pontuacao>(this.api, pontuacao);
   }
 
-  atualizarPontuacaoJogador(idJogador: number, acertou: boolean): Observable<Palavra> {
+  atualizarPontuacaoJogador(idJogador: any, acertou: boolean): Observable<Palavra> {
     return this.getPontuacaoPorIdJogador(idJogador)
     .pipe(
       switchMap((pontuacaoAntiga: Pontuacao[]) => {
         const pontuacao = pontuacaoAntiga[0];
         pontuacao.acertou = acertou;
         pontuacao.tentativas = pontuacao.tentativas + 1;
-        return this.http.post<Palavra>(this.api, pontuacao);
+        return this.http.put<Pontuacao>(this.api+'/'+pontuacao.id, pontuacao);
       })
     )
   }

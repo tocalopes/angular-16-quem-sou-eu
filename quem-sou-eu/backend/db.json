@@ -13,32 +13,36 @@
   ],
   "palavras": [
     {
-      "id": "2c76",
+      "id": "86a3",
       "idJogadorCadastro": 1,
       "idJogadorResponde": 2,
-      "palavra": "asdasd",
+      "palavra": "penis",
+      "ativo": "N",
       "idPalavra": 1
     },
     {
-      "id": "4def",
+      "id": "8182",
       "idJogadorCadastro": 2,
       "idJogadorResponde": 1,
-      "palavra": "adasd",
+      "palavra": "bucceta",
+      "ativo": "N",
       "idPalavra": 2
     }
   ],
   "pontuacao": [
     {
-      "id": "0177",
+      "id": "2aca",
       "idJogador": 1,
-      "tentativas": 0,
-      "acertou": false
+      "tentativas": 1,
+      "acertou": true,
+      "nomeJogador": "Gabriel"
     },
     {
-      "id": "a8fa",
+      "id": "4ee5",
       "idJogador": 2,
-      "tentativas": 0,
-      "acertou": false
+      "tentativas": 3,
+      "acertou": true,
+      "nomeJogador": "mylena"
     }
   ]
 }

@@ -5,6 +5,7 @@ import { JogadorService } from './servicos/jogador.service';
 import { Jogador } from 'src/app/shared/models/jogador.model';
 import { EstruturaQuestionamento } from 'src/app/shared/models/estruturaQuestionamento.model';
 import { QuemPerguntaQuemRespondeService } from 'src/app/shared/servicos/quem-pergunta-quem-responde.service';
+import { PontuacaoService } from 'src/app/shared/servicos/pontuacao.service';
 
 @Component({
   selector: 'app-cadastro-jogador',
@@ -20,7 +21,8 @@ export class CadastroJogadorComponent implements OnInit {
   constructor(
     private router: Router,
     private jogadorService: JogadorService,
-    private quemPerguntaERespondeService: QuemPerguntaQuemRespondeService
+    private quemPerguntaERespondeService: QuemPerguntaQuemRespondeService,
+    private pontuacaoService: PontuacaoService
   ) {}
   ngOnInit(): void {
     this.onStart();
@@ -58,6 +60,7 @@ export class CadastroJogadorComponent implements OnInit {
 
   cadastrarPalavras() {
     this.quemPerguntaERespondeService.setData(this.ordenarQuemPergunta());
+    this.pontuacaoService.clear();
     this.router.navigate(['cadastrar-palavras', 0]);
   }
 

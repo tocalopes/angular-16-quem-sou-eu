@@ -26,6 +26,11 @@ export class QuemPerguntaQuemRespondeService {
     this.quemPerguntaQuemResponde = estruturaQuestionamento;
   }
 
+  removerJogador(idJogador: any){
+    this.quemPerguntaQuemResponde = this.quemPerguntaQuemResponde
+    .filter(e => e.jogadorQueResponde?.idJogador !== idJogador);
+  }
+
   getData() :  EstruturaQuestionamento[]{
     return this.quemPerguntaQuemResponde;
   }

@@ -19,7 +19,7 @@ export class PalavraService {
     idJogadorResponde?: number
   ): Observable<Palavra[]> {
     return this.http.get<Palavra[]>(
-      `${this.api}?idJogadorResponde=${idJogadorResponde}`
+      `${this.api}?idJogadorResponde=${idJogadorResponde}&ativo=S`
     );
   }
 
@@ -31,9 +31,14 @@ export class PalavraService {
     return this.getPalavras()
     .pipe(
       switchMap((palavras: Palavra[]) => {
+        palavra.ativo = 'S';
         palavra.idPalavra = palavras.length + 1;
         return this.http.post<Palavra>(this.api, palavra);
       })
     )
+  }
+
+  atualizar (palavra: Palavra){
+    return this.http.put<Palavra>(`${this.api}/${palavra.id}`,palavra);
   }
 }

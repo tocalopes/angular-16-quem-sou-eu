@@ -5,6 +5,7 @@ import { QuemPerguntaQuemRespondeService } from 'src/app/shared/servicos/quem-pe
 import { PalavraService } from '../cadastro-palavra/servicos/palavra.service';
 import { Palavra } from 'src/app/shared/models/palavra.model';
 import { EstruturaQuestionamento } from 'src/app/shared/models/estruturaQuestionamento.model';
+import { Pontuacao } from 'src/app/shared/models/pontuacao.model';
 
 @Component({
   selector: 'app-quem-sou-eu',
@@ -12,22 +13,14 @@ import { EstruturaQuestionamento } from 'src/app/shared/models/estruturaQuestion
   styleUrls: ['./quem-sou-eu.component.scss'],
 })
 export class QuemSouEuComponent implements OnInit {
-  
   palavra: Palavra = {};
   isLoading = true;
   quemPerguntaEResponde: EstruturaQuestionamento = {};
+  isFinalizado = false;
+  fimDeJogo = false;
+  pontuacaoFinal: Pontuacao[] = [];
 
-  ngOnInit(): void {    
-    this.palavraService
-    .getPalavraByIdJogadorResponde(
-      this.quemPerguntaERespondeService.getJogadorAtual().jogadorQueResponde?.idJogador)
-    .subscribe((palavras: Palavra[]) => {
-      this.palavra = palavras[0];
-      this.quemPerguntaEResponde = this.quemPerguntaERespondeService.getJogadorAtual();
-      this.isLoading = false;
-    });
-  }
-
+  
   constructor(
     public quemPerguntaERespondeService: QuemPerguntaQuemRespondeService,
     private pontuacaoService: PontuacaoService,
@@ -39,16 +32,86 @@ export class QuemSouEuComponent implements OnInit {
   private cronometro: Subscription = new Observable().subscribe();
 
 
+  ngOnInit(): void {
+    this.start();
+  }
+
+  start() {
+    this.isLoading = true;
+    if(this.quemPerguntaERespondeService.getData().length > 0){
+    this.isFinalizado = false;
+    this.iniciado = false;
+    this.tempo = 60;
+    this.palavraService
+      .getPalavraByIdJogadorResponde(
+        this.quemPerguntaERespondeService.getJogadorAtual().jogadorQueResponde
+          ?.idJogador
+      )
+      .subscribe((palavras: Palavra[]) => {
+        if (palavras.length === 0) {
+          this.isLoading = false;
+          this.fimDeJogo = true;
+        } else {
+          this.palavra = palavras[0];
+          this.quemPerguntaEResponde =
+          this.quemPerguntaERespondeService.getJogadorAtual();
+          this.isLoading = false;
+        }
+      });
+    }else{
+      this.isLoading = true;
+      this.pontuacaoService.getPontuacaoGeral()
+        .subscribe( (pontuacoes: Pontuacao[]) => {
+          this.fimDeJogo = true;
+          this.pontuacaoFinal = pontuacoes.sort((pa,pb) => pb.tentativas - pa.tentativas);
+          this.isLoading = true;
+        })
+    }
+  }
+
   iniciar() {
     this.iniciado = true;
     this.cronometro = interval(1000).subscribe(() => {
       this.tempo--;
       if (this.tempo === 0) {
+        this.parar();
       }
     });
   }
 
   parar() {
     this.cronometro.unsubscribe();
+    this.isFinalizado = true;
+  }
+
+  acertou() {
+    this.pontuacaoService
+      .atualizarPontuacaoJogador(
+        this.quemPerguntaERespondeService.getJogadorAtual().jogadorQueResponde
+          ?.idJogador,
+        true
+      )
+      .subscribe((r) => {
+        this.quemPerguntaERespondeService.removerJogador(this.quemPerguntaEResponde.jogadorQueResponde?.idJogador);
+        this.quemPerguntaERespondeService.proximoJogador();
+        this.palavra.ativo = 'N';
+        this.palavraService
+          .atualizar(this.palavra)
+          .subscribe((r) => this.start());
+      });
+  }
+
+  errou() {
+    this.pontuacaoService
+      .atualizarPontuacaoJogador(
+        this.quemPerguntaERespondeService.getJogadorAtual().jogadorQueResponde
+          ?.idJogador,
+        false
+      )
+      .subscribe((r) => {
+        this.quemPerguntaERespondeService.proximoJogador();
+        this.palavra.ativo = 'S';
+        this.start();
+      });
   }
 }
