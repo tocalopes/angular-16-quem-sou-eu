@@ -16,10 +16,10 @@ export class PalavraService {
   }
 
   getPalavraByIdJogadorResponde(
-    idJogadorResponde: number
+    idJogadorResponde?: number
   ): Observable<Palavra[]> {
     return this.http.get<Palavra[]>(
-      `${this.api}?IdJogadorResponde=${idJogadorResponde}`
+      `${this.api}?idJogadorResponde=${idJogadorResponde}`
     );
   }
 

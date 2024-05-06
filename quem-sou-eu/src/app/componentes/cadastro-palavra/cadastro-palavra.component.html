@@ -16,6 +16,7 @@
 
     <div class="container-selecao">
         <button mat-raised-button (click)="voltar()" color="accent">Voltar</button>
-        <button mat-raised-button (click)="proximo()">Próximo</button>
+        <button mat-raised-button *ngIf="index != quemPerguntaERespondeService.getData().length - 1" (click)="proximo()">Próximo</button>
+        <button mat-raised-button *ngIf="index === quemPerguntaERespondeService.getData().length - 1" (click)="proximo()">Iniciar</button>
     </div>
 </div>

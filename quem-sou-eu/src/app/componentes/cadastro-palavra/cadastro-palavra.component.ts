@@ -5,6 +5,8 @@ import { EstruturaQuestionamento } from 'src/app/shared/models/estruturaQuestion
 import { QuemPerguntaQuemRespondeService } from 'src/app/shared/servicos/quem-pergunta-quem-responde.service';
 import { PalavraService } from './servicos/palavra.service';
 import { Palavra } from 'src/app/shared/models/palavra.model';
+import { PontuacaoService } from 'src/app/shared/servicos/pontuacao.service';
+import { Jogador } from 'src/app/shared/models/jogador.model';
 
 @Component({
   selector: 'app-cadastro-palavra',
@@ -15,8 +17,9 @@ export class CadastroPalavraComponent implements OnInit{
   constructor(
     private router: Router,
     private route:ActivatedRoute,
-    private quemPerguntaERespondeService: QuemPerguntaQuemRespondeService,
-    private palavraService: PalavraService) {}
+    public quemPerguntaERespondeService: QuemPerguntaQuemRespondeService,
+    private palavraService: PalavraService,
+    private pontuacaoService: PontuacaoService) {}
   
   index: number = 0;
   perguntaResponde: EstruturaQuestionamento = {};
@@ -83,7 +86,11 @@ export class CadastroPalavraComponent implements OnInit{
     }
     this.palavraService.adicionar(palavra).subscribe( r => {
       if(this.index === this.quemPerguntaERespondeService.getData().length - 1){
-        this.router.navigate(['']);
+        let perguntas: EstruturaQuestionamento[] = this.quemPerguntaERespondeService.getData();
+        let jogadores: Jogador[] = perguntas.filter(e => e != undefined).map(e => e.jogadorQuePergunta) as Jogador[];
+        this.pontuacaoService.iniciarPartida();
+        this.pontuacaoService.iniciarPontuacoes(jogadores);
+        this.router.navigate(['/quem-sou-eu']);
       }else{
         this.index = this.index + 1;
         this.onStart();

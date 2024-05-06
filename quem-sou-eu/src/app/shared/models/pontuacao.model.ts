@@ -1,7 +1,8 @@
 export interface Pontuacao {
     id?: number,
     idJogador?: number,
-    tentativas?: string
+    tentativas: number,
+    acertou?: boolean
 }
 
 export interface JogadorAtual {

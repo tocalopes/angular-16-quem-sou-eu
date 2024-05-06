@@ -11,12 +11,34 @@
       "nome": "mylena"
     }
   ],
-  "palavras": [],
-  "puntuacao": [
+  "palavras": [
     {
-      "id": "0",
-      "idJogador": 0,
-      "tentativas": 0
+      "id": "2c76",
+      "idJogadorCadastro": 1,
+      "idJogadorResponde": 2,
+      "palavra": "asdasd",
+      "idPalavra": 1
+    },
+    {
+      "id": "4def",
+      "idJogadorCadastro": 2,
+      "idJogadorResponde": 1,
+      "palavra": "adasd",
+      "idPalavra": 2
+    }
+  ],
+  "pontuacao": [
+    {
+      "id": "0177",
+      "idJogador": 1,
+      "tentativas": 0,
+      "acertou": false
+    },
+    {
+      "id": "a8fa",
+      "idJogador": 2,
+      "tentativas": 0,
+      "acertou": false
     }
   ]
 }
