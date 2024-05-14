@@ -7,6 +7,9 @@ import { Palavra } from 'src/app/shared/models/palavra.model';
 import { EstruturaQuestionamento } from 'src/app/shared/models/estruturaQuestionamento.model';
 import { Pontuacao } from 'src/app/shared/models/pontuacao.model';
 
+
+
+
 @Component({
   selector: 'app-quem-sou-eu',
   templateUrl: './quem-sou-eu.component.html',
@@ -18,7 +21,15 @@ export class QuemSouEuComponent implements OnInit {
   quemPerguntaEResponde: EstruturaQuestionamento = {};
   isFinalizado = false;
   fimDeJogo = false;
+  burro = false;
+  ofensa = '';
   pontuacaoFinal: Pontuacao[] = [];
+  OFENSAS = [
+    "MAS VOCÊ É MUITO BURRINHO MESMO",
+    "SUA MÃE SABE QUE VOCÊ É UM ANTA",
+    "SENTA LÁ ANTA",
+    "ISSO QUE DÁ PULAR O ENSINO FUNDAMENTAL"
+  ]
 
   
   constructor(
@@ -63,7 +74,7 @@ export class QuemSouEuComponent implements OnInit {
       this.pontuacaoService.getPontuacaoGeral()
         .subscribe( (pontuacoes: Pontuacao[]) => {
           this.fimDeJogo = true;
-          this.pontuacaoFinal = pontuacoes.sort((pa,pb) => pb.tentativas - pa.tentativas);
+          this.pontuacaoFinal = pontuacoes.sort((pa,pb) => pa.tentativas - pb.tentativas);
           this.isLoading = true;
         })
     }
@@ -109,8 +120,14 @@ export class QuemSouEuComponent implements OnInit {
         false
       )
       .subscribe((r) => {
+        setTimeout(() => {
+          this.burro = true;
+          this.ofensa = this.OFENSAS.sort(() => Math.random() - 0.5)[0];
+        },5000);
         this.quemPerguntaERespondeService.proximoJogador();
         this.palavra.ativo = 'S';
+        this.burro = false;
+        this.ofensa = '';
         this.start();
       });
   }
